@@ -19,7 +19,11 @@ export default defineConfig({
         rollupOptions: {
             external: [],
             output: {
-                globals: {}
+                globals: {
+                    // 这里可以定义全局变量的映射关系
+                    // 例如：'vue': 'Vue' 
+                    // 当前项目中暂时没有需要定义的全局变量
+                }
             }
         }
     },

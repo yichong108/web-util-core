@@ -1,5 +1,5 @@
 import {describe, it, expect, beforeEach, afterEach} from 'vitest'
-import {createLocalData} from '../lib'
+import {createLocalData, default as localData} from '../lib'
 
 describe('createLocalData', () => {
     let testData: ReturnType<typeof createLocalData>
@@ -125,5 +125,26 @@ describe('createLocalData', () => {
 
         // 应该使用前缀存储
         expect(prefixedData.get('key')).toBe('value')
+    })
+})
+
+describe('localData', () => {
+    beforeEach(() => {
+        // 清空 localStorage 和 sessionStorage
+        localStorage.clear()
+        sessionStorage.clear()
+    })
+
+    afterEach(() => {
+        // 测试后清理
+        localStorage.clear()
+        sessionStorage.clear()
+    })
+
+    describe('localData basic', () => {
+        it('should set and get data from localStorage', () => {
+            localData.set('testKey', 'testValue')
+            expect(localData.get('testKey')).toBe('testValue')
+        })
     })
 })

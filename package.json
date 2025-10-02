@@ -1,7 +1,7 @@
 {
   "name": "@web-util/local-data",
   "private": false,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A utility library for handling local data storage and management",
   "author": "Wish Zhang",
   "license": "MIT",

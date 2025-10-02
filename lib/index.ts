@@ -184,3 +184,5 @@ export function createLocalData(options: localDataOptions = {} as any) {
         clear,
     }
 }
+
+export default createLocalData()
