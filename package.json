@@ -1,36 +1,48 @@
 {
   "name": "@web-util/local-data",
-  "private": true,
+  "private": false,
   "version": "0.1.0",
+  "description": "A utility library for handling local data storage and management",
+  "author": "Wish Zhang",
+  "license": "MIT",
   "type": "module",
-  "unpkg": "./dist/local-data.umd.js",
-  "jsdelivr": "./dist/local-data.umd.js",
+  "unpkg": "./dist/local-data.iife.js",
+  "jsdelivr": "./dist/local-data.iife.js",
   "files": [
     "dist",
     "README.md",
     "lib"
   ],
-  "main": "./dist/local-data.umd.cjs",
+  "main": "./dist/local-data.es.js",
   "module": "./dist/local-data.es.js",
-  "types": "./index.d.ts",
+  "types": "./dist/index.d.ts",
   "exports": {
-    "types": "./index.d.ts",
-    "import": "./dist/local-data.es.js",
-    "require": "./dist/local-data.umd.cjs"
+    "import": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/local-data.es.js"
+    }
   },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "test:run": "vitest run"
+    "test:run": "vitest run",
+    "release": "npm run build && npm login && npm publish",
+    "publint": "publint",
+    "pack": "npm pack"
   },
   "devDependencies": {
+    "@types/node": "^24.6.2",
     "@vitest/ui": "^3.2.4",
     "jsdom": "^27.0.0",
+    "publint": "^0.3.13",
     "typescript": "~5.9.2",
     "vite": "^7.1.5",
     "vite-plugin-dts": "^4.5.4",
     "vitest": "^3.2.4"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

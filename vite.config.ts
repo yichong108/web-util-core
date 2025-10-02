@@ -14,7 +14,7 @@ export default defineConfig({
             entry: './lib/index.ts',
             name: 'LocalData',
             fileName: (format) => `local-data.${format}.js`,
-            formats: ['es', 'cjs', 'umd']
+            formats: ['es', 'iife']
         },
         rollupOptions: {
             external: [],
