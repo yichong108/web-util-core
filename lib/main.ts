@@ -1,6 +1,4 @@
 export interface Options {
-    name: string;
-    content?: any;
     type?: string
 }
 
@@ -46,12 +44,12 @@ export function createLocalData(options: localDataOptions = {} as any) {
     /**
      * 存储localStorage
      */
-    function set(params: Options): void {
-        let {name, content, type} = params
-        name = keyName + (name || '')
+    function set(key: string, value: any, options: Options = {}): void {
+        let {type} = options
+        let name = keyName + (key || '')
         let obj = {
-            dataType: typeof content,
-            content: content,
+            dataType: typeof value,
+            content: value,
             type: type,
             datetime: new Date().getTime(),
         }
@@ -62,13 +60,18 @@ export function createLocalData(options: localDataOptions = {} as any) {
     /**
      * 获取localStorage
      */
-    function get(params: Options): any {
-        let {name} = params
-        name = keyName + (name || '')
-        let obj: any = {},
-            content: any
-        obj = window.sessionStorage.getItem(name)
-        if (validatenull(obj)) obj = window.localStorage.getItem(name)
+    function get(key: string, options: Options = {}): any {
+        const {type} = options
+
+        let name = keyName + (key || '')
+        let obj: any = {};
+        let content: any;
+
+        if (type === 'session') {
+            obj = window.sessionStorage.getItem(name)
+        } else {
+            obj = window.localStorage.getItem(name)
+        }
         if (validatenull(obj)) return
         try {
             obj = JSON.parse(obj || '{}')
@@ -90,10 +93,10 @@ export function createLocalData(options: localDataOptions = {} as any) {
     /**
      * 删除localStorage
      */
-    function remove(params: Pick<Options, 'name' | 'type'>): void {
-        let {name, type} = params
-        name = keyName + (name || '')
-        if (type) {
+    function remove(key: string, options: Options = {}): void {
+        let {type} = options
+        let name = keyName + (key || '')
+        if (type === 'session') {
             window.sessionStorage.removeItem(name)
         } else {
             window.localStorage.removeItem(name)
@@ -103,27 +106,28 @@ export function createLocalData(options: localDataOptions = {} as any) {
     /**
      * 获取全部localStorage
      */
-    function getAll(params: Pick<Options, 'type'>): Array<{ name: string | null; content: any }> {
-        let list: Array<{ name: string | null; content: any }> = []
-        let {type} = params
-        if (type) {
+    function getAll(options: Pick<Options, 'type'> = {}): Array<{ key: string; value: any }> {
+        let list: Array<{ key: string; value: any }> = []
+        let {type} = options
+        if (type === 'session') {
             for (let i = 0; i < window.sessionStorage.length; i++) {
-                list.push({
-                    name: window.sessionStorage.key(i),
-                    content: get({
-                        name: window.sessionStorage.key(i) as any,
-                        type: 'session',
-                    }),
-                })
+                if (window.sessionStorage.key(i)) {
+                    list.push({
+                        key: window.sessionStorage.key(i) || '',
+                        value: get(window.sessionStorage.key(i) || '', {
+                            type: 'session',
+                        }),
+                    })
+                }
             }
         } else {
             for (let i = 0; i < window.localStorage.length; i++) {
-                list.push({
-                    name: window.localStorage.key(i),
-                    content: get({
-                        name: window.localStorage.key(i) as any,
-                    }),
-                })
+                if (window.localStorage.key(i)) {
+                    list.push({
+                        key: window.localStorage.key(i) || '',
+                        value: get(window.localStorage.key(i) || ''),
+                    })
+                }
             }
         }
         return list
@@ -132,8 +136,8 @@ export function createLocalData(options: localDataOptions = {} as any) {
     /**
      * 清空全部localStorage
      */
-    function clear(params: Pick<Options, 'type'>): void {
-        let {type} = params
+    function clear(options: Pick<Options, 'type'> = {}): void {
+        let {type} = options
         if (type) {
             window.sessionStorage.clear()
         } else {
