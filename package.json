@@ -1,25 +1,25 @@
 {
-  "name": "@web-util/local-data",
+  "name": "@web-util/core",
   "private": false,
-  "version": "0.2.0",
+  "version": "0.1.0",
   "description": "A utility library for handling local data storage and management",
   "author": "Wish Zhang",
   "license": "MIT",
   "type": "module",
-  "unpkg": "./dist/local-data.iife.js",
-  "jsdelivr": "./dist/local-data.iife.js",
+  "unpkg": "./dist/core.iife.js",
+  "jsdelivr": "./dist/core.iife.js",
   "files": [
     "dist",
     "README.md",
     "lib"
   ],
-  "main": "./dist/local-data.es.js",
-  "module": "./dist/local-data.es.js",
+  "main": "./dist/core.es.js",
+  "module": "./dist/core.es.js",
   "types": "./dist/index.d.ts",
   "exports": {
     "import": {
       "types": "./dist/index.d.ts",
-      "default": "./dist/local-data.es.js"
+      "default": "./dist/core.es.js"
     }
   },
   "scripts": {

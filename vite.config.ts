@@ -12,8 +12,8 @@ export default defineConfig({
     build: {
         lib: {
             entry: './lib/index.ts',
-            name: 'LocalData',
-            fileName: (format) => `local-data.${format}.js`,
+            name: 'WebUtilCore',
+            fileName: (format) => `core.${format}.js`,
             formats: ['es', 'iife']
         },
         rollupOptions: {

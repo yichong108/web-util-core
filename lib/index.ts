@@ -56,7 +56,7 @@ function validatenull(val: any): boolean {
  * @param options - 配置选项
  * @returns 包含操作方法的对象
  */
-export function createLocalData(options: localDataOptions = {} as any) {
+export function createStorage(options: localDataOptions = {} as any) {
     const {prefix} = options
 
     const keyName = prefix || ''
@@ -184,5 +184,3 @@ export function createLocalData(options: localDataOptions = {} as any) {
         clear,
     }
 }
-
-export default createLocalData()
