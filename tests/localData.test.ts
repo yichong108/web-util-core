@@ -1,5 +1,5 @@
 import {describe, it, expect, beforeEach, afterEach} from 'vitest'
-import {createLocalData} from '../lib/main'
+import {createLocalData} from '../lib'
 
 describe('createLocalData', () => {
     let testData: ReturnType<typeof createLocalData>

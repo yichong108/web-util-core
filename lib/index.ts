@@ -1,9 +1,29 @@
-export interface Options {
+/**
+ * 本地存储工具库
+ * 提供对 localStorage 和 sessionStorage 的统一封装
+ * @packageDocumentation
+ */
+
+interface Options {
+    /**
+     * 存储类型
+     * - 'session': sessionStorage
+     * - 其他或不传: localStorage
+     */
     type?: string
 }
 
+interface localDataOptions {
+    /**
+     * 键名前缀
+     */
+    prefix?: string
+}
+
 /**
- * 判断是否为空
+ * 判断值是否为空
+ * @param val - 要判断的值
+ * @returns 值是否为空
  */
 function validatenull(val: any): boolean {
     if (typeof val == 'boolean') {
@@ -31,18 +51,21 @@ function validatenull(val: any): boolean {
     return false
 }
 
-
-interface localDataOptions {
-    prefix?: string
-}
-
+/**
+ * 创建一个本地存储实例
+ * @param options - 配置选项
+ * @returns 包含操作方法的对象
+ */
 export function createLocalData(options: localDataOptions = {} as any) {
     const {prefix} = options
 
     const keyName = prefix || ''
 
     /**
-     * 存储localStorage
+     * 存储数据到 localStorage 或 sessionStorage
+     * @param key - 键名
+     * @param value - 要存储的值
+     * @param options - 存储选项
      */
     function set(key: string, value: any, options: Options = {}): void {
         let {type} = options
@@ -58,7 +81,10 @@ export function createLocalData(options: localDataOptions = {} as any) {
     }
 
     /**
-     * 获取localStorage
+     * 从 localStorage 或 sessionStorage 获取数据
+     * @param key - 键名
+     * @param options - 存储选项
+     * @returns 存储的值，如果不存在则返回 undefined
      */
     function get(key: string, options: Options = {}): any {
         const {type} = options
@@ -91,7 +117,9 @@ export function createLocalData(options: localDataOptions = {} as any) {
     }
 
     /**
-     * 删除localStorage
+     * 从 localStorage 或 sessionStorage 删除数据
+     * @param key - 键名
+     * @param options - 存储选项
      */
     function remove(key: string, options: Options = {}): void {
         let {type} = options
@@ -104,7 +132,9 @@ export function createLocalData(options: localDataOptions = {} as any) {
     }
 
     /**
-     * 获取全部localStorage
+     * 获取所有 localStorage 或 sessionStorage 数据
+     * @param options - 存储选项
+     * @returns 包含所有键值对的数组
      */
     function getAll(options: Pick<Options, 'type'> = {}): Array<{ key: string; value: any }> {
         let list: Array<{ key: string; value: any }> = []
@@ -134,7 +164,8 @@ export function createLocalData(options: localDataOptions = {} as any) {
     }
 
     /**
-     * 清空全部localStorage
+     * 清空所有 localStorage 或 sessionStorage 数据
+     * @param options - 存储选项
      */
     function clear(options: Pick<Options, 'type'> = {}): void {
         let {type} = options

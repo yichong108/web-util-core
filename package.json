@@ -1,23 +1,26 @@
 {
   "name": "@web-util/local-data",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
+  "unpkg": "./dist/local-data.umd.js",
+  "jsdelivr": "./dist/local-data.umd.js",
   "files": [
     "dist",
-    "index.d.ts"
+    "README.md",
+    "lib"
   ],
-  "main": "./dist/counter.umd.cjs",
-  "module": "./dist/counter.js",
+  "main": "./dist/local-data.umd.cjs",
+  "module": "./dist/local-data.es.js",
   "types": "./index.d.ts",
   "exports": {
     "types": "./index.d.ts",
-    "import": "./dist/counter.js",
-    "require": "./dist/counter.umd.cjs"
+    "import": "./dist/local-data.es.js",
+    "require": "./dist/local-data.umd.cjs"
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:run": "vitest run"
@@ -27,6 +30,7 @@
     "jsdom": "^27.0.0",
     "typescript": "~5.9.2",
     "vite": "^7.1.5",
+    "vite-plugin-dts": "^4.5.4",
     "vitest": "^3.2.4"
   }
 }
