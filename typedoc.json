@@ -1,0 +1,13 @@
+{
+  "entryPoints": ["lib/index.ts"],
+  "out": "docs/api/v1/reference",
+  "plugin": ["typedoc-plugin-markdown"],
+  "hideGenerator": true,
+  "hideBreadcrumbs": true,
+  "hidePageTitle": true,
+  "excludeNotDocumented": false,
+  "excludeInternal": true,
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "readme": "none"
+}
