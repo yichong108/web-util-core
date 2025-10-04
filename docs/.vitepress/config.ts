@@ -1,7 +1,7 @@
 import {defineConfig} from 'vitepress'
 
 export default defineConfig({
-    base: '/',
+    base: '/web-util-core/',
     lang: 'en-US',
     title: '@web-util',
     description: 'A utility library for handling local data storage and management',
